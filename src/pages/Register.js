@@ -3,22 +3,24 @@ import styled from 'styled-components'
 //import { Link } from "react-router-dom"
 
 
-export default function Home(){
+export default function Register(){
 
-    function goIn(){
+    function access(){
         console.log("Entrou");
     }
 
     return(
         <Page1>
         <img src={logo} alt={logo}/>
-        <Form onSubmit={goIn}>
+        <Form onSubmit={access}>
             <input type="text" id="email" name="email" required placeholder="email"/>
             <input type="password" id="senha" name="senha" required placeholder="senha"/>
-            <button type="submit" value="Submit">Entrar</button>
+            <input type="text" id="nome" name="nome" required placeholder="nome"/>
+            <input type="text" id="foto" name="foto" required placeholder="foto"/>
+            <button type="submit" value="Submit">Cadastrar</button>
         </Form>
 {/*         <Link to={`/page2`}> */}
-            <p>Não tem uma conta? Cadastre-se!</p>
+            <p>Já tem uma conta? Faça login!</p>
         {/* </Link> */}
         </Page1>
     )
@@ -44,9 +46,10 @@ const Page1=styled.div`
         text-decoration-line: underline;
         color: #52B6FF;
     }
-    
+    /* button{
+        margin: auto;
+    } */
 `
 const Form = styled.form`
     width: 303px;
-	
 `

@@ -1,18 +1,21 @@
 import { createGlobalStyle } from "styled-components"
 
 const GlobalStyle = createGlobalStyle`
+	*{box-sizing:border-box;}
 
 	body{
-		background: #E5E5E5;
+		background: #FFFFFF;
 		width: 100%;
 		height: 100%;
+		font-family: 'Lexend Deca', sans-serif;
+		
 	}
+
 	button {
-		width: 303px;
+		width: 100%;
 		height: 45px;
 		background: #52B6FF;
 		border-radius: 4.63636px;
-		font-family: 'Lexend Deca';
 		font-style: normal;
 		font-weight: 400;
 		font-size: 20.976px;
@@ -33,11 +36,10 @@ const GlobalStyle = createGlobalStyle`
 	}
 	input {
 		background: #FFFFFF;
-		width: 303px;
+		width: 100%;
 		height: 45px;
 		border: 1px solid #D5D5D5;
 		border-radius: 5px;
-		font-family: 'Lexend Deca';
 		font-style: normal;
 		font-weight: 400;
 		font-size: 19.976px;
@@ -45,8 +47,8 @@ const GlobalStyle = createGlobalStyle`
 		color: #DBDBDB;
 		
 
-		margin-bottom: 25px;
-		margin-top: 10px;
+		margin-bottom: 6px;
+		margin-top: 6px;
 		padding: 0 10px;
 		display: flex;
 		align-items: center;

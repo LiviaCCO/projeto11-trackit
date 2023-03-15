@@ -1,10 +1,14 @@
 import styled from 'styled-components'
 import Home from './pages/Home'
+import Register from './pages/Register'
+import Habits from './pages/Habits'
 
 export default function App() {
   return (
     <Container>
-    <Home/>
+      {/* <Home/> */}
+      {/* <Register/> */}
+      <Habits/>
     
     </Container>
   )
