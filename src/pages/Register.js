@@ -15,7 +15,8 @@ export default function Register(){
     function access(event){
         event.preventDefault();
         const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up";
-        const body = { email, name, image, password};
+
+        const body = {email, name, image, password};
 
         console.log(body);
         const promise = axios.post(url, body)
@@ -28,7 +29,7 @@ export default function Register(){
         <img src={logo} alt={logo}/>
         <Form onSubmit={access}>
             <input type="text" id="email" name="email" required placeholder="email" value={email} onChange={e => setEmail(e.target.value)}/>
-            <input type="password" id="senha" name="senha" required placeholder="senha" value={password} onChange={e => setPassword(e.target.value)}/>
+            <input type="password" id="senha" name="senha" required placeholder="senha" value={password} onChange={e => setPassword(Number(e.target.value))}/>
             <input type="text" id="nome" name="nome" required placeholder="nome" value={name} onChange={e => setName(e.target.value)}/>
             <input type="text" id="foto" name="foto" required placeholder="foto" value={image} onChange={e => setImage(e.target.value)}/>
             <button type="submit" value="Submit">Cadastrar</button>

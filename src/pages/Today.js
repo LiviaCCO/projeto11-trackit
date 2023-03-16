@@ -1,20 +1,29 @@
 import styled from 'styled-components'
+import Head from './components/Head'
+import Menu from './components/Menu'
 
 export default function Today(){
     return(
+        <>
+        <Head />
         <ToDay>
                 <h1>Segunda, 17/05 </h1>
-                <h3>Nenhum hábito concluído ainda</h3>
+                <h2>Nenhum hábito concluído ainda</h2>
                 <HabitToday>
-                    <Info>
-                        <p>Ler 1 capítulo de livro</p>
-                        <h4>Sequência atual: 3 dias</h4>
-                        <h4>Seu recorde: 5 dias</h4>
-                    </Info>
-                    <Check><ion-icon name="checkbox"/></Check>
-                </HabitToday>
-                            
+                    <p>Ler 1 capítulo de livro</p>
+                    <h3>Sequência atual: 3 dias</h3>
+                    <h3>Seu recorde: 5 dias</h3>
+                    <ion-icon name="checkbox"/>
+                </HabitToday>   
+                <HabitToday>
+                    <p>Ler 1 capítulo de livro</p>
+                    <h3>Sequência atual: 3 dias</h3>
+                    <h3>Seu recorde: 5 dias</h3>
+                    <ion-icon name="checkbox"/>
+                </HabitToday>   
         </ToDay>
+        <Menu />
+        </>
     )
 }
 
@@ -23,69 +32,28 @@ const ToDay=styled.div`
     width: 375px;
     height: 700px;
     padding: 28px 17px;
-    h1{
-        font-style: normal;
-        font-weight: 400;
-        font-size: 22.976px;
-        line-height: 29px;
-        color: #126BA5;
-    }
-    p{
-        font-style: normal;
-        font-weight: 400;
-        font-size: 19.976px;
-        line-height: 25px;        
-        color: #666666;
-    }
-    h3{
-        font-style: normal;
-        font-weight: 400;
-        font-size: 17.976px;
-        line-height: 22px;
+    h2{
         color: #BABABA;
+        margin-bottom: 28px;
     }
 `
-//limpar este
 const HabitToday=styled.div`
     display:flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
-    color: red;
-    height:91px;
+    width: 340px;
+    height: 94px;
+    background: #FFFFFF;
+    border-radius: 5px;
+
     margin-top: 10px;
     padding: 15px;
     position: relative;
-    p{
-        font-style: normal;
-        font-weight: 400;
-        font-size: 19.976px;
-        line-height: 25px;        
-        color: #666666;
-    } 
     ion-icon{
         position: absolute;
-        left: 10px;
+        right: 10px;
         top: 10px;
-    }
-`
-const Info=styled.div`
-    display:flex;
-    flex-direction:column;
-    h4{
-        font-style: normal;
-        font-weight: 400;
-        font-size: 12.976px;
-        line-height: 16px;
-        color: #666666;
-    }
-`
-const Check=styled.div`
-    width: 69px;
-    height: 69px;
-    ion-icon{
-        /* font-size: 69px; */
+        font-size: 75px;
         color: #EBEBEB;
-        /* border: 1px solid #E7E7E7; */
-        border-radius: 5px;
     }
 `

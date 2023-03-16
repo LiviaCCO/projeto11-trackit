@@ -1,11 +1,17 @@
 import styled from 'styled-components' 
+import Head from './components/Head'
+import Menu from './components/Menu'
 
 export default function Historic(){
     return (
+        <>
+        <Head />
         <Hist>
             <h1>Histórico</h1>
             <h2>Em breve você poderá ver o histórico dos seus hábitos aqui!</h2>
         </Hist> 
+        <Menu />
+        </>
     )
 }
 

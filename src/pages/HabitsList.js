@@ -1,9 +1,13 @@
 import styled from 'styled-components'
+import Head from './components/Head'
+import Menu from './components/Menu'
 
 export default function HabitsList(){
     const buttons = ["D","S","T","Q","Q","S","S"];
 
     return (
+        <>
+        <Head />
         <HabitList>
                 <Add>
                     <h1>Meus hábitos</h1>
@@ -31,9 +35,19 @@ export default function HabitsList(){
                         )}
                     </WeekDays>
                 </Habit>
+                <Habit>
+                    <p>Ler 1 capítulo de livro</p>
+                    <ion-icon name="trash-outline"></ion-icon>
+                    <WeekDays>
+                        {buttons.map((d)=>
+                            <button value="day">{d}</button>
+                        )}
+                    </WeekDays>
+                </Habit>
                 <h2>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</h2>
-
             </HabitList>
+            <Menu />
+            </>
     )
 }
 
@@ -43,32 +57,21 @@ const HabitList = styled.div`
     height: 700px;
     padding: 28px 17px;
     h2{
-        font-style: normal;
-        font-weight: 400;
-        font-size: 17.976px;
-        line-height: 22px;
-        color: #666666;
-        margin-top: 28px;
+        margin-top: 29px;
     }
 `
-
 const Add = styled.div`
     display:flex;
     justify-content: space-between;
     margin-bottom: 20px;
-
-    /* h1{
-        font-style: normal;
-        font-weight: 400;
-        font-size: 22.976px;
-        line-height: 29px;
-        color: #126BA5;
-    } */
     button{
         width: 40px;
         height: 35px;
         background: #52B6FF;
         border-radius: 4.63636px;
+        font-size: 26.976px;
+        line-height: 34px;
+        color: #FFFFFF;
     }
 `
 const NewHabit=styled.div`
@@ -81,11 +84,18 @@ const NewHabit=styled.div`
     line-height: 25px;
 
     input{
+        font-family: 'Lexend Deca';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 19.976px;
+        line-height: 25px;
+        color: #666666;
         width: 303px;
         height: 45px;
         background: #FFFFFF;
         border: 1px solid #D5D5D5;
         border-radius: 5px;
+        color: #666666;
         &::placeholder{
             color: #DBDBDB;
         }
@@ -94,15 +104,21 @@ const NewHabit=styled.div`
 `
 const WeekDays=styled.div`
     display:flex;
-    justify-content: space-between;
+    gap: 4px;
     margin-top: 8px;
     button{
         width: 30px;
         height: 30px;
-        background: #FFFFFF;
+        font-family: 'Lexend Deca';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 19.976px;
+        line-height: 25px;
         color: #DBDBDB;
+        background: #FFFFFF;
         border: 1px solid #D5D5D5;
         border-radius: 5px;
+        padding:0px;
     }
 `
 const CancelSalve = styled.div`
@@ -112,17 +128,25 @@ const CancelSalve = styled.div`
     gap:10px;
 
     button{
+        font-family: 'Lexend Deca';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 15.976px;
+        line-height: 20px;
+        text-align: center;
+
         &:nth-child(1){
-            width: 104px;
+            width: 94px;
             height: 35px;
             background: #FFFFFF;
             color:#52B6FF;
             border: none;
         }
         &:nth-child(2){
-            width: 84px;
+            width: 74px;
             height: 35px;
             background: #52B6FF;
+            color: #FFFFFF;
             border-radius: 4.63636px;
         } 
     }
@@ -132,16 +156,9 @@ const Habit = styled(NewHabit)`
     margin-top: 10px;
     padding: 15px;
     position: relative;
-    p{
-        font-style: normal;
-        font-weight: 400;
-        font-size: 19.976px;
-        line-height: 25px;        
-        color: #666666;
-    } 
     ion-icon{
         position: absolute;
-        left: 10px;
+        right: 10px;
         top: 10px;
     }
 `
