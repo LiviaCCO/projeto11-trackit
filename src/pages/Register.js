@@ -1,27 +1,41 @@
-import logo from '../assets/logo.png'
-import styled from 'styled-components'
-//import { Link } from "react-router-dom"
-
+import logo from '../assets/logo.png';
+import styled from 'styled-components';
+import { useState } from 'react';
+import axios from 'axios';
+import {useNavigate, Link} from 'react-router-dom';
 
 export default function Register(){
 
-    function access(){
-        console.log("Entrou");
+    const [email, setEmail] = useState("");
+    const [name, setName] = useState("");
+    const [image, setImage] = useState("");
+    const [password, setPassword] = useState("");
+    const navigate = useNavigate();
+
+    function access(event){
+        event.preventDefault();
+        const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up";
+        const body = { email, name, image, password};
+
+        console.log(body);
+        const promise = axios.post(url, body)
+        promise.then(()=>navigate("/"))
+        promise.catch(err=>alert(`Erro ${err.response.status}`));
     }
 
     return(
         <Page1>
         <img src={logo} alt={logo}/>
         <Form onSubmit={access}>
-            <input type="text" id="email" name="email" required placeholder="email"/>
-            <input type="password" id="senha" name="senha" required placeholder="senha"/>
-            <input type="text" id="nome" name="nome" required placeholder="nome"/>
-            <input type="text" id="foto" name="foto" required placeholder="foto"/>
+            <input type="text" id="email" name="email" required placeholder="email" value={email} onChange={e => setEmail(e.target.value)}/>
+            <input type="password" id="senha" name="senha" required placeholder="senha" value={password} onChange={e => setPassword(e.target.value)}/>
+            <input type="text" id="nome" name="nome" required placeholder="nome" value={name} onChange={e => setName(e.target.value)}/>
+            <input type="text" id="foto" name="foto" required placeholder="foto" value={image} onChange={e => setImage(e.target.value)}/>
             <button type="submit" value="Submit">Cadastrar</button>
         </Form>
-{/*         <Link to={`/page2`}> */}
+        <Link to={"/"}> 
             <p>Já tem uma conta? Faça login!</p>
-        {/* </Link> */}
+        </Link> 
         </Page1>
     )
 }

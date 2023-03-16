@@ -1,25 +1,50 @@
 import logo from '../assets/logo.png'
 import styled from 'styled-components'
-//import { Link } from "react-router-dom"
-
+import { useNavigate, Link } from "react-router-dom"
+import {useState} from 'react';
+import axios from 'axios';
 
 export default function Home(){
 
-    function goIn(){
-        console.log("Entrou");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const navigate = useNavigate();
+
+    function goIn(event){
+        event.preventDefault();
+        const url="https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login";
+        const body={email, password};
+        axios.post(url, body)
+            .then(()=>navigate("/hoje"))
+            .catch(err => alert(`Erro ${err.response.status}`))
+        
     }
 
     return(
         <Page1>
         <img src={logo} alt={logo}/>
         <Form onSubmit={goIn}>
-            <input type="text" id="email" name="email" required placeholder="email"/>
-            <input type="password" id="senha" name="senha" required placeholder="senha"/>
+            <input 
+            type="text" 
+            id="email" 
+            name="email" 
+            required 
+            placeholder="email" 
+            value={email} 
+            onChange={(e)=>setEmail(e.target.value)}/>
+            <input 
+            type="password" 
+            id="senha" 
+            name="senha" 
+            required 
+            placeholder="senha" 
+            value={password} 
+            onChange={(e)=>setPassword(e.target.value)}/>
             <button type="submit" value="Submit">Entrar</button>
         </Form>
-{/*         <Link to={`/page2`}> */}
+        <Link to={"/cadastro"}>
             <p>Não tem uma conta? Cadastre-se!</p>
-        {/* </Link> */}
+        </Link>
         </Page1>
     )
 }
