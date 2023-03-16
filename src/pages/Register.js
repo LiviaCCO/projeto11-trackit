@@ -28,13 +28,48 @@ export default function Register(){
         <Page1>
         <img src={logo} alt={logo}/>
         <Form onSubmit={access}>
-            <input type="text" id="email" name="email" required placeholder="email" value={email} onChange={e => setEmail(e.target.value)}/>
-            <input type="password" id="senha" name="senha" required placeholder="senha" value={password} onChange={e => setPassword(Number(e.target.value))}/>
-            <input type="text" id="nome" name="nome" required placeholder="nome" value={name} onChange={e => setName(e.target.value)}/>
-            <input type="text" id="foto" name="foto" required placeholder="foto" value={image} onChange={e => setImage(e.target.value)}/>
-            <button type="submit" value="Submit">Cadastrar</button>
+            <input
+            data-test="email-input"
+            type="text" 
+            id="email" 
+            name="email" 
+            required 
+            placeholder="email" 
+            value={email} 
+            onChange={e => setEmail(e.target.value)}/>
+            <input 
+            data-test="password-input"
+            type="password"
+            id="senha"
+            name="senha" 
+            required 
+            placeholder="senha" 
+            value={password} 
+            onChange={e => setPassword(Number(e.target.value))}/>
+            <input 
+            data-test="user-name-input"
+            type="text" 
+            id="nome" 
+            name="nome" 
+            required 
+            placeholder="nome" 
+            value={name} 
+            onChange={e => setName(e.target.value)}/>
+            <input 
+            data-test="user-image-input"
+            type="text" 
+            id="foto" 
+            name="foto" 
+            required 
+            placeholder="foto" 
+            value={image} 
+            onChange={e => setImage(e.target.value)}/>
+            <button 
+            data-test="signup-btn"
+            type="submit" 
+            value="Submit">Cadastrar</button>
         </Form>
-        <Link to={"/"}> 
+        <Link data-test="login-link" to={"/"}> 
             <p>Já tem uma conta? Faça login!</p>
         </Link> 
         </Page1>

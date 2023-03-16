@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 export default function Head(){
     return(
-        <Header>
+        <Header data-test="header">
             <img src={TrackIt} alt={TrackIt}/>
             <img src={foto} alt={foto}/>
         </Header>

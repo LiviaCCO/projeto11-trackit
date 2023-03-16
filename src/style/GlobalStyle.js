@@ -63,18 +63,17 @@ const GlobalStyle = createGlobalStyle`
 		font-style: normal;
 		font-weight: 400;
 		font-size: 19.976px;
-		line-height: 25px;
-		color: #DBDBDB;
-		
+		line-height: 25px;		
 
 		margin-bottom: 6px;
 		margin-top: 6px;
 		padding: 0 10px;
 		display: flex;
 		align-items: center;
-		&::placeholder{
-			/* font-style: italic; */
-		}
+		color: #666666;
+        &::placeholder{
+            color: #DBDBDB;
+        }
 
 
 		

@@ -6,15 +6,15 @@ import { Link } from "react-router-dom"
 
 export default function Menu(){
     return (
-        <Footer>
-            <Link to={"/habitos"}><h2>Hábitos</h2></Link>
-            <Link to={"/hoje"}>
+        <Footer data-test="menu">
+            <Link data-test="habit-link" to={"/habitos"}><h2>Hábitos</h2></Link>
+            <Link data-test="today-link" to={"/hoje"}>
                 <img src={elipse} alt={elipse}/>
                 <img src={Hoje} alt={Hoje}/>
                 <img src={group} alt={group}/>
                 
             </Link>
-            <Link to={"/historico"}><h2>Histórico</h2></Link>
+            <Link data-test="history-link" to={"/historico"}><h2>Histórico</h2></Link>
         </Footer>
     )
 }

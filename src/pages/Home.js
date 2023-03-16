@@ -24,7 +24,8 @@ export default function Home(){
         <Page1>
         <img src={logo} alt={logo}/>
         <Form onSubmit={goIn}>
-            <input 
+            <input
+            data-test="email-input"
             type="text" 
             id="email" 
             name="email" 
@@ -33,6 +34,7 @@ export default function Home(){
             value={email} 
             onChange={(e)=>setEmail(e.target.value)}/>
             <input 
+            data-test="password-input"
             type="password" 
             id="senha" 
             name="senha" 
@@ -40,9 +42,9 @@ export default function Home(){
             placeholder="senha" 
             value={password} 
             onChange={(e)=>setPassword(e.target.value)}/>
-            <button type="submit" value="Submit">Entrar</button>
+            <button data-test="login-btn" type="submit" value="Submit">Entrar</button>
         </Form>
-        <Link to={"/cadastro"}>
+        <Link data-test="signup-link" to={"/cadastro"}>
             <p>Não tem uma conta? Cadastre-se!</p>
         </Link>
         </Page1>

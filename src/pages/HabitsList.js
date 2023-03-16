@@ -11,36 +11,53 @@ export default function HabitsList(){
         <HabitList>
                 <Add>
                     <h1>Meus hábitos</h1>
-                    <button>+</button>
+                    <button data-test="habit-create-btn">+</button>
                 </Add>
-                <NewHabit>
-                    <input type="text" id="habitoNovo" name="habitoNovo" required placeholder="nome do hábito"/>
+                <NewHabit data-test="habit-create-container" >
+                    <input 
+                    data-test="habit-name-input" 
+                    type="text" 
+                    id="habitoNovo" 
+                    name="habitoNovo" 
+                    required 
+                    placeholder="nome do hábito"/>
                     <WeekDays>
                         {buttons.map((d)=>
-                            <button value="day">{d}</button>
+                            <button data-test="habit-day" value="day">{d}</button>
                         )}
                     </WeekDays>
                     <CancelSalve>
-                        <button value="cancel">Cancelar</button>
-                        <button value="salve">Salvar</button>
+                        <button data-test="habit-create-cancel-btn" value="cancel">Cancelar</button>
+                        <button data-test="habit-create-save-btn"  value="salve">Salvar</button>
                     </CancelSalve>
                     
                 </NewHabit>
-                <Habit>
-                    <p>Ler 1 capítulo de livro</p>
-                    <ion-icon name="trash-outline"></ion-icon>
+                <NewHabit data-test="habit-create-container" >
+                    <input 
+                    data-test="habit-name-input" 
+                    type="text" 
+                    id="habitoNovo" 
+                    name="habitoNovo" 
+                    required 
+                    placeholder="nome do hábito"/>
                     <WeekDays>
                         {buttons.map((d)=>
-                            <button value="day">{d}</button>
+                            <button data-test="habit-day" value="day">{d}</button>
                         )}
                     </WeekDays>
-                </Habit>
-                <Habit>
-                    <p>Ler 1 capítulo de livro</p>
-                    <ion-icon name="trash-outline"></ion-icon>
+                    <CancelSalve>
+                        <button data-test="habit-create-cancel-btn" value="cancel">Cancelar</button>
+                        <button data-test="habit-create-save-btn"  value="salve">Salvar</button>
+                    </CancelSalve>
+                    
+                </NewHabit>
+                
+                <Habit data-test="habit-container">
+                    <p data-test="habit-name">Ler 1 capítulo de livro</p>
+                    <ion-icon data-test="habit-delete-btn" name="trash-outline"></ion-icon>
                     <WeekDays>
                         {buttons.map((d)=>
-                            <button value="day">{d}</button>
+                            <button data-test="habit-day" value="day">{d}</button>
                         )}
                     </WeekDays>
                 </Habit>

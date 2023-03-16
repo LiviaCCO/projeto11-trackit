@@ -7,19 +7,19 @@ export default function Today(){
         <>
         <Head />
         <ToDay>
-                <h1>Segunda, 17/05 </h1>
-                <h2>Nenhum hábito concluído ainda</h2>
-                <HabitToday>
-                    <p>Ler 1 capítulo de livro</p>
-                    <h3>Sequência atual: 3 dias</h3>
-                    <h3>Seu recorde: 5 dias</h3>
-                    <ion-icon name="checkbox"/>
-                </HabitToday>   
-                <HabitToday>
-                    <p>Ler 1 capítulo de livro</p>
-                    <h3>Sequência atual: 3 dias</h3>
-                    <h3>Seu recorde: 5 dias</h3>
-                    <ion-icon name="checkbox"/>
+                <h1 data-test="today">Segunda, 17/05 </h1>
+                <h2 data-test="today-counter">Nenhum hábito concluído ainda</h2>
+                <HabitToday data-test="today-habit-container">
+                    <p data-test="today-habit-name" >Ler 1 capítulo de livro</p>
+                    <h3 data-test="today-habit-sequence">Sequência atual: 3 dias</h3>
+                    <h3 data-test="today-habit-record">Seu recorde: 5 dias</h3>
+                    <ion-icon data-test="today-habit-check-btn" name="checkbox"/>
+                </HabitToday>  
+                <HabitToday data-test="today-habit-container">
+                    <p data-test="today-habit-name" >Ler 1 capítulo de livro</p>
+                    <h3 data-test="today-habit-sequence">Sequência atual: 3 dias</h3>
+                    <h3 data-test="today-habit-record">Seu recorde: 5 dias</h3>
+                    <ion-icon data-test="today-habit-check-btn" name="checkbox"/>
                 </HabitToday>   
         </ToDay>
         <Menu />
