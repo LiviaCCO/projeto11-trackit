@@ -4,20 +4,25 @@ import { useNavigate, Link } from "react-router-dom"
 import {useState} from 'react';
 import axios from 'axios';
 
-export default function Home(){
+export default function Home({setUser}){
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
+    function go(e){
+        console.log(e.data);
+        setUser(e.data);
+        navigate("/hoje");
+    }
+
     function goIn(event){
         event.preventDefault();
         const url="https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login";
         const body={email, password};
-        axios.post(url, body)
-            .then(()=>navigate("/hoje"))
-            .catch(err => alert(`Erro ${err.response.status}`))
-        
+        const promise = axios.post(url, body)
+        promise.then(resp=>go(resp))
+        promise.catch(err => alert(`Erro ${err.response.data.message}`));
     }
 
     return(
@@ -26,9 +31,8 @@ export default function Home(){
         <Form onSubmit={goIn}>
             <input
             data-test="email-input"
-            type="text" 
+            type="email" 
             id="email" 
-            name="email" 
             required 
             placeholder="email" 
             value={email} 
@@ -37,7 +41,6 @@ export default function Home(){
             data-test="password-input"
             type="password" 
             id="senha" 
-            name="senha" 
             required 
             placeholder="senha" 
             value={password} 

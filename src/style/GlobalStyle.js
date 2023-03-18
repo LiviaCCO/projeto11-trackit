@@ -36,6 +36,7 @@ const GlobalStyle = createGlobalStyle`
 		height: 45px;
 		background: #52B6FF;
 		border-radius: 4.63636px;
+		font-family: 'Lexend Deca', sans-serif;
 		font-style: normal;
 		font-weight: 400;
 		font-size: 20.976px;
@@ -60,6 +61,7 @@ const GlobalStyle = createGlobalStyle`
 		height: 45px;
 		border: 1px solid #D5D5D5;
 		border-radius: 5px;
+		font-family: 'Lexend Deca', sans-serif;
 		font-style: normal;
 		font-weight: 400;
 		font-size: 19.976px;

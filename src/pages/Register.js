@@ -15,13 +15,15 @@ export default function Register(){
     function access(event){
         event.preventDefault();
         const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up";
-
         const body = {email, name, image, password};
 
         console.log(body);
-        const promise = axios.post(url, body)
-        promise.then(()=>navigate("/"))
-        promise.catch(err=>alert(`Erro ${err.response.status}`));
+            axios
+            .post(url, body)
+            .then(()=>navigate("/"))
+            .catch(err=>alert(`Erro ${err.response.data.message}`));
+            
+
     }
 
     return(
@@ -30,7 +32,7 @@ export default function Register(){
         <Form onSubmit={access}>
             <input
             data-test="email-input"
-            type="text" 
+            type="email" 
             id="email" 
             name="email" 
             required 
@@ -45,7 +47,7 @@ export default function Register(){
             required 
             placeholder="senha" 
             value={password} 
-            onChange={e => setPassword(Number(e.target.value))}/>
+            onChange={e => setPassword(e.target.value)}/>
             <input 
             data-test="user-name-input"
             type="text" 

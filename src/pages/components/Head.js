@@ -1,12 +1,15 @@
-import foto from '../../assets/foto.png'
 import TrackIt from '../../assets/TrackIt.png'
 import styled from 'styled-components'
+import { useContext } from 'react';
+import Context from '../../Context';
 
 export default function Head(){
+    const [user, setUser] = useContext(Context);
+
     return(
         <Header data-test="header">
             <img src={TrackIt} alt={TrackIt}/>
-            <img src={foto} alt={foto}/>
+            <Foto><img src={user.image} alt={user.name} /></Foto>
         </Header>
     )
 }
@@ -21,11 +24,16 @@ const Header=styled.div`
     background: #126BA5;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
     img{
-        &:nth-child(1){
+        &:nth-child(2){
             width: 97px;
-        &:nth-child(0){
-            width: 51px;
-            height: 51px;
-        }
     }
 `
+const Foto = styled.div`
+    width: 50px;
+    height: 50px;
+    img{
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+    }
+` 
