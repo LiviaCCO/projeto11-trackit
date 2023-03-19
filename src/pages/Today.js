@@ -8,67 +8,103 @@ import { useState, useContext, useEffect } from 'react'
 import Context from '../Context'
 import axios from 'axios';
 
-//import 'dayjs/locale/es';
+
 
 export default function Today(){
 
     const [user, setUser] = useContext(Context);
-    console.log(user.token);
     const date = dayjs().locale('pt-br').format('DD/MM');
+    const indexWeekday = new Date().getDay();
+    const weekdayList = ["Domingo",, "Segunda-feira", "terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"];
+    const weekday = weekdayList[indexWeekday];
     
     const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today";
     const config = {
         headers: {
             "Authorization": `Bearer ${user.token}`
         }
-    }  
-
-    const [listHabit, setListHabit] = useState([
-        {habit: "Ler 1 capítulo de livro", sequence:"3", recorde:"5" }
-    ]);
+    }
+    const [habitList, setHabitList] = useState([]);
     const [concluded, setConcluded] = useState(false);
-    const [did, setDid] = useState([]);
+    const [refresh, setRefresh] = useState(false);
+    const [taskId, setTaskId] = useState([]);
+    const [done, setDone] = useState([]);
+    const progress = ((taskId.length/habitList.length)*100).toFixed(2);
 
-    /* var localeData = require('dayjs/plugin/localeData')
-    dayjs.extend(localeData)
-    dayjs().localeData() */
-    //console.log(dayjs().weekday());
-    
-    //const params = useParams();
-    //console.log(params);
-    function check(event){
-        if (concluded===false){
-            setConcluded(true);
+    function sucessCheck(e, did){
+
+        if (did === "false"){
+            const newTaskId = [...taskId, e];
+            setTaskId(newTaskId);
+            setRefresh(!refresh);
+        }else{
+            const newTaskId = taskId.filter(id=>id!==e);
+            setTaskId(newTaskId);
+            setRefresh(!refresh);
         }
+        
 
     }
 
+    function check(event){
+        const idHabit = event.target.id;
+        const did = event.target.color;
+        const targ = event.target;
+        console.log("id", idHabit);
+        console.log("color", did);
+        console.log("icon", targ);
+
+        if(did==="false"){
+            axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${idHabit}/check`, [], config)
+            .then(sucessCheck(idHabit, did))
+            .catch(err=>console.log(err.response.data));
+        }else{ 
+            axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${idHabit}/uncheck`, [], config)
+            .then(sucessCheck(idHabit, did))
+            .catch(err=>console.log(err.response.data));
+        }
+    }
+    
+
     useEffect(()=>{
         axios.get(url, config)
-        .then(resp=>console.log(resp.data))
+        .then(resp=>setHabitList(resp.data))
         .catch(err=>console.log(err.response.data))
-    },[]);
+    },[habitList, refresh]);
+
+    if(habitList.length===0){
+        return(
+            <>
+            <Head />
+            <ToDay>
+                <h2>Você não tem nenhum hábito cadastrado para hoje.</h2>
+            </ToDay>
+            <Menu />
+            </>
+        )
+    }
     
     return(
         <>
         <Head />
         <ToDay>
-                <h1 data-test="today">Segunda, {date} </h1>
-                <h2 data-test="today-counter">{concluded ? (<span>67% dos hábitos concluídos</span>) : "Nenhum hábito concluído ainda"}</h2>
-                {listHabit.map((h)=>
-                    <HabitToday data-test="today-habit-container" key={h.habit}>
-                        <p data-test="today-habit-name" >{h.habit}</p>
-                        <h3 data-test="today-habit-sequence">Sequência atual: {h.sequence} dias</h3>
-                        <h3 data-test="today-habit-record">Seu recorde: {h.recorde} dias</h3>
+                <h1 data-test="today">{weekday}, {date} </h1>
+                <h2 data-test="today-counter">{(progress!==0) ? (<span>{progress}% dos hábitos concluídos</span>) : "Nenhum hábito concluído ainda"}</h2>
+                {habitList.map((h)=>
+                    <HabitToday data-test="today-habit-container" key={h.id}>
+                        <p data-test="today-habit-name">{h.name}</p>
+                        <h3 data-test="today-habit-sequence">Sequência atual: <span> {h.currentSequence} dias</span></h3>
+                        <h3 data-test="today-habit-record">
+                            Seu recorde: {h.currentSequence === h.highestSequence ? 
+                            <span>{h.highestSequence} dias</span> : <>{h.highestSequence} dias</> } </h3>  
                         <ion-icon 
                         data-test="today-habit-check-btn" 
                         name="checkbox"
-                        id={h.habit}
-                        value={did.includes(h.habit)}
+                        color={h.done}
+                        id={h.id}
                         onClick={(e)=>check(e)}/>
                     </HabitToday>
                 )}
-                
         </ToDay>
         <Menu />
         </>
@@ -105,6 +141,9 @@ const HabitToday=styled.div`
         right: 10px;
         top: 10px;
         font-size: 75px;
-        color: {(props)=> props.value ? #8FC549 : #EBEBEB};
+        color: ${(props)=> props.color ? "#8FC549" : "#EBEBEB"};
+    }
+    span{
+        color: ${props => props.color ? "#8FC549" : ""}
     }
 `

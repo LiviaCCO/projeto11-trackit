@@ -114,13 +114,11 @@ export default function HabitsList(){
         .catch(err=>console.log(err.response.data));
     }
     
-
-
     return (
         <>
         <Head />
         <HabitList>
-        <Add>
+                <Add>
                     <h1>Meus hábitos</h1>
                     <button data-test="habit-create-btn" onClick={()=>setAdd(!add)}>+</button>
                 </Add>         
@@ -149,7 +147,7 @@ export default function HabitsList(){
                     }
                 
                 {list.map((t)=>
-                <Habit data-test="habit-container">
+                <Habit data-test="habit-container" key={t.id}>
                     <p data-test="habit-name">{t.name}</p>
                     <ion-icon 
                     data-test="habit-delete-btn" 
