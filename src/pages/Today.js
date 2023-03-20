@@ -92,12 +92,13 @@ export default function Today(){
                         <p data-test="today-habit-name">{h.name}</p>
                         <h3 data-test="today-habit-sequence">Sequência atual: <span> {h.currentSequence} dias</span></h3>
                         <h3 data-test="today-habit-record">Seu recorde: {h.highestSequence} dias </h3>  
-                        <ion-icon 
-                        data-test="today-habit-check-btn" 
-                        name="checkbox"
-                        color={h.done}
-                        id={h.id}
-                        onClick={(e)=>check(e)}/>
+                            <ion-icon 
+                            data-test="today-habit-check-btn" 
+                            name="checkbox"
+                            color={h.done}
+                            id={h.id}
+                            onClick={(e)=>check(e)} />
+                    
                     </HabitToday>
                 )}
         </ToDay>
@@ -134,7 +135,7 @@ const HabitToday=styled.div`
     ion-icon{
         position: absolute;
         right: 10px;
-        top: 10px;
+        top: 10px; 
         font-size: 75px;
         color: ${(props)=> props.color ? "#8FC549" : "#EBEBEB"};
     }

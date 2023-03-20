@@ -4,6 +4,7 @@ import { useNavigate, Link } from "react-router-dom"
 import {useContext, useState} from 'react';
 import axios from 'axios';
 import Context from '../Context';
+import ThreeDots from 'react-spinners/DotLoader'
 
 export default function Home(){
 
@@ -11,7 +12,7 @@ export default function Home(){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
-    //const [progress, setProgress] = useState(0);
+    const [isDisabled, setIsDisabled]=useState(false);
 
     function go(e){
         //console.log(e.data);
@@ -24,6 +25,7 @@ export default function Home(){
     }
 
     function goIn(event){
+        setIsDisabled(!isDisabled)
         event.preventDefault();
         const url="https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login";
         const body={email, password};
@@ -43,6 +45,7 @@ export default function Home(){
             required 
             placeholder="email" 
             value={email} 
+            disabled={isDisabled}
             onChange={(e)=>setEmail(e.target.value)}/>
             <input 
             data-test="password-input"
@@ -51,8 +54,22 @@ export default function Home(){
             required 
             placeholder="senha" 
             value={password} 
+            disabled={isDisabled}
             onChange={(e)=>setPassword(e.target.value)}/>
-            <button data-test="login-btn" type="submit" value="Submit">Entrar</button>
+            
+            <button data-test="login-btn" type="submit" value="Submit" /* onClick={setIsDisabled(!isDisabled)} */>
+                {!isDisabled ? "Entrar" :
+                <ThreeDots 
+                height="20" 
+                width="20" 
+                radius="5" 
+                color="#FFFFFF" 
+                ariaLabel="three-dots-loading"
+                wrapperStyle={{}}
+                wrapperClassName=""
+                visibled={true}/> } 
+            </button> 
+            
         </Form>
         <Link data-test="signup-link" to={"/cadastro"}>
             <p>Não tem uma conta? Cadastre-se!</p>

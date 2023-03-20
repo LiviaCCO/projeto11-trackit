@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Context from '../Context';
 import Head from './components/Head'
 import Menu from './components/Menu'
+import ThreeDots from 'react-spinners/DotLoader'
 
 export default function HabitsList(){
     const [list, setList] = useState([]);
@@ -14,6 +15,7 @@ export default function HabitsList(){
     const [task, setTask] = useState('');
     const [start, setStart] = useState(true);
     const [refresh, setRefresh]=useState(false);
+    const [isDisabled, setIsDisabled]=useState(false);
 
     const {user, setUser} = useContext(Context);
     const body={name:task, days};
@@ -41,9 +43,11 @@ export default function HabitsList(){
         setTask("");
         setAdd(false);
         setStart(!start);
+        setIsDisabled(!isDisabled);
     }
 
     function save(){
+        setIsDisabled(!isDisabled);
         axios.post(urlPost,body, config)
         .then(resp=>getList(resp.data))
         .catch(err=>alert(err.response.data));
@@ -135,16 +139,29 @@ export default function HabitsList(){
                         name="habitoNovo"
                         value={task}
                         onChange={(e)=>setTask(e.target.value)}
-                        required 
+                        required
+                        disabled={isDisabled}
                         placeholder="nome do hábito"/>
                         <WeekDays>
                             {buttons.map((d, index)=>
-                                <button data-test="habit-day" id={index} value={days.includes(index)} onClick={(e)=>selectDay(e)}>{d}</button>
+                                <Button data-test="habit-day" id={index} value={days.includes(index.toString())} onClick={(e)=>selectDay(e)}>{d}</Button>
                             )}
                         </WeekDays>
                         <CancelSalve>
                             <button data-test="habit-create-cancel-btn" value="cancel" onClick={cancel}>Cancelar</button>
-                            <button data-test="habit-create-save-btn" value="salve" onClick={save}>Salvar</button>
+                            <button data-test="habit-create-save-btn" 
+                            value="salve" 
+                            onClick={save}>
+                                {!isDisabled ? "Salvar" :
+                                    <ThreeDots 
+                                    height="20" 
+                                    width="20" 
+                                    radius="5" 
+                                    color="#FFFFFF" 
+                                    ariaLabel="three-dots-loading"
+                                    wrapperStyle={{}}
+                                    wrapperClassName=""
+                                    visibled={true}/> }</button>
                         </CancelSalve>
                     </NewHabit>
                     : ""
@@ -160,7 +177,7 @@ export default function HabitsList(){
                     </ion-icon>
                     <WeekDays>
                         {buttons.map((d, index)=>
-                            <button data-test="habit-day" value={(t.days).includes(index)}>{d}</button>
+                            <Button data-test="habit-day" value={(t.days).includes(index.toString())}>{d}</Button>
                         )}
                     </WeekDays>
                 </Habit>
@@ -241,6 +258,21 @@ const WeekDays=styled.div`
         padding:0px;
     }
 `
+const Button=styled.button`
+    width: 30px;
+    height: 30px;
+    font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19.976px;
+    line-height: 25px;
+    color: ${props=> props.value ? "#FFFFFF" : "#DBDBDB"};
+    background: ${(props) => props.value ? "#CFCFCF" : "#FFFFFF"};
+    border: 1px solid #D5D5D5;
+    border-radius: 5px;
+    padding:0px;
+`
+
 const CancelSalve = styled.div`
     display:flex;
     justify-content: flex-end;
