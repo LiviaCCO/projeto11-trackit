@@ -4,7 +4,7 @@ import { useContext } from 'react';
 import Context from '../../Context';
 
 export default function Head(){
-    const [user, setUser] = useContext(Context);
+    const {user} = useContext(Context);
 
     return(
         <Header data-test="header">

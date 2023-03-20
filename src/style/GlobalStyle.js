@@ -76,11 +76,9 @@ const GlobalStyle = createGlobalStyle`
         &::placeholder{
             color: #DBDBDB;
         }
-
-
-		
 		
 	}
+	
 `
 
 export default GlobalStyle

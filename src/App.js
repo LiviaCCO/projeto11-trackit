@@ -11,16 +11,19 @@ import Context from './Context'
 
 export default function App() {
   const [user, setUser] = useState([]);
+  const [progress, setProgress] = useState(0);
+  const [done, setDone] = useState([]);
+  const data = {user, setUser, progress, setProgress, done, setDone};
   return (
     <BrowserRouter>
-    <Context.Provider value={[user, setUser]}>
+    <Context.Provider value={data}>
       <Container>
         <Routes>
-          <Route path="/" element={<Home setUser={setUser}/>}></Route>
+          <Route path="/" element={<Home />}></Route>
           <Route path="/cadastro" element={<Register/>}></Route>
           <Route path="/hoje" element={<Today />}></Route>
-          <Route path="/habitos" element={<HabitsList user={user}/>}></Route>
-          <Route path="/historico" element={<Historic user={user}/>}></Route>            
+          <Route path="/habitos" element={<HabitsList />}></Route>
+          <Route path="/historico" element={<Historic />}></Route>            
         </Routes>
       </Container>
     </Context.Provider>

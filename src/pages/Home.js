@@ -1,18 +1,25 @@
 import logo from '../assets/logo.png'
 import styled from 'styled-components'
 import { useNavigate, Link } from "react-router-dom"
-import {useState} from 'react';
+import {useContext, useState} from 'react';
 import axios from 'axios';
+import Context from '../Context';
 
-export default function Home({setUser}){
+export default function Home(){
 
+    const {user, setUser, progress} = useContext(Context);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
+    //const [progress, setProgress] = useState(0);
 
     function go(e){
-        console.log(e.data);
+        //console.log(e.data);
+        console.log("progress", progress);
         setUser(e.data);
+        console.log("user",user);
+        /* const newData = [e.data, {percentage: progress}]; 
+        console.log(newData); */
         navigate("/hoje");
     }
 

@@ -15,7 +15,7 @@ export default function HabitsList(){
     const [start, setStart] = useState(true);
     const [refresh, setRefresh]=useState(false);
 
-    const [user, setUser] = useContext(Context);
+    const {user, setUser} = useContext(Context);
     const body={name:task, days};
     const urlGet = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
     const urlPost = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
@@ -26,8 +26,7 @@ export default function HabitsList(){
     } 
 
     function toList(event){
-        const newList = event;
-        setList(newList);
+        setList(event);
     }
 
     useEffect(()=>{
@@ -56,6 +55,7 @@ export default function HabitsList(){
 
     function selectDay(e){
         const newDay = e.target.id;
+        console.log(e.target)
 
         if(!days.includes(newDay)){
             const newD = [...days, newDay];
@@ -90,7 +90,11 @@ export default function HabitsList(){
                         placeholder="nome do hábito"/>
                         <WeekDays>
                             {buttons.map((d, index)=>
-                                <button data-test="habit-day" key={index} id={index} value={days.includes(index)} onClick={(e)=>selectDay(e)}>{d}</button>
+                                <button data-test="habit-day" 
+                                key={index} 
+                                id={index} 
+                                value={days.includes(index)} 
+                                onClick={(e)=>selectDay(e)}>{d}</button>
                             )}
                         </WeekDays>
                         <CancelSalve>

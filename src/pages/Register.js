@@ -22,8 +22,6 @@ export default function Register(){
             .post(url, body)
             .then(()=>navigate("/"))
             .catch(err=>alert(`Erro ${err.response.data.message}`));
-            
-
     }
 
     return(

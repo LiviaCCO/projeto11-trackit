@@ -10,7 +10,7 @@ import axios from 'axios';
 
 export default function Today(){
 
-    const {user, progress, setProgress, done, setDone} = useContext(Context);
+    const {user, progress, setProgress} = useContext(Context);
     const date = dayjs().locale('pt-br').format('DD/MM');
     const indexWeekday = new Date().getDay();
     const weekdayList = ["Domingo", "Segunda-feira", "terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"];
@@ -23,51 +23,79 @@ export default function Today(){
         }
     }
     const [habitList, setHabitList] = useState([]);
-   // const [done, setDone]=useState([]);
-    //const percent= ((done.length/habitList.length)*100).toFixed(0);
-    //const [refresh, setRefresh] = useState(false);
-    //setDone(habitList.filter(item=>item.done===true));
-    ///setProgress(((done.length/habitList.length)*100).toFixed(0));
+    const [done, setDone]=useState([]);
+      
+    const percent= ((done.length/habitList.length)*100).toFixed(0);
+    const [refresh, setRefresh] = useState(false);
+    const [taskId, setTaskId] = useState([]);
 
-    function add(id){
-        const newDone = habitList.filter(hab=>hab.done===true);
-        //const newDone = [...done, id];
+ 
+    /* useEffect(()=>{
+        const newDone = habitList.filter(item=>item.done===true);
         setDone(newDone);
-        setProgress((((newDone.length)/habitList.length)*100).toFixed(0));
-        console.log("lista dps", habitList)
-    }
-    function remove(id){
-        const newDone = habitList.filter(hab=>hab.done===true);
-        //const newDone = done.filter(n=>n!==id);
-        setDone(newDone);
-        setProgress((((newDone.length)/habitList.length)*100).toFixed(0));
-        console.log("lista dps", habitList) 
-    }
+    },[done]) */
 
-    
+    /* function sucessCheck(e, did){
+
+        if (did === "false"){
+            const newTaskId = [...taskId, e];
+            setTaskId(newTaskId);
+            ///setProgress(newProgress);
+            //console.log(progress);
+            setRefresh(!refresh);
+        }else{
+            const newTaskId = taskId.filter(id=>id!==e);
+            setTaskId(newTaskId);
+            //setProgress(newProgress);
+            //console.log(progress);
+            setRefresh(!refresh);
+        }
+    } */
+
+   
 
     function check(event){
         const idHabit = event.target.id;
         const did = event.target.color;
         console.log("antes", habitList);
-        //console.log("status", did)
+        console.log(done)
 
         if(did==="false"){
             axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${idHabit}/check`, [], config)
-            .then(add(idHabit))
+            /* .then(setProgress(percent)) */
+            .then(setRefresh(!refresh))
             .catch(err=>console.log(err.response.data));
         }else{ 
             axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${idHabit}/uncheck`, [], config)
-            .then(remove(idHabit)) 
+            /* .then(setProgress(percent)) */
+            .then(setRefresh(!refresh))
             .catch(err=>console.log(err.response.data));
         }
+        
+        
+    }
+
+    console.log("dps", habitList);
+    console.log(done)
+    
+
+    /* useEffect(()=>{
+        const newDone = habitList.filter(item=>item.done===true);
+        setDone(newDone);
+        setProgress(percent)
+    },[habitList])  */
+
+    function toList(e){
+        setHabitList(e);
+        setDone(habitList.filter(item=>item.done===true));
+        setProgress(percent);
     }
 
     useEffect(()=>{
         axios.get(url, config)
-        .then(resp=>setHabitList(resp.data)) 
+        .then(resp=>toList(resp.data)) 
         .catch(err=>console.log(err.response.data));
-    },[done]);
+    },[refresh]);
 
     if(habitList.length===0){
         return(
